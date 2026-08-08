@@ -27,7 +27,7 @@ button{padding:11px 16px;border:0;border-radius:9px;font-size:15px;cursor:pointe
 <div><label>Your name</label><input id="customerName"></div>
 <div><label>Email</label><input id="email" type="email"></div>
 <div><label>Calendar Name</label><input id="calendarName" placeholder="Example: The Sanford Family Calendar"></div>
-<div><label>Order number</label><input id="orderNumber"></div>
+<div><label>Order number</label><input id="orderNumber" placeholder="Enter the order number from Amanda&#39;s email"></div>
 <div><label>Calendar year</label><input id="calendarYear" type="number"></div>
 </div>
 <div class="section">
@@ -53,13 +53,7 @@ button{padding:11px 16px;border:0;border-radius:9px;font-size:15px;cursor:pointe
 <p class="small">After downloading the response file, send it back to Amanda Sanford at amandasanfordproducts@gmail.com.</p></div>
 </div>
 <script>
-const q=new URLSearchParams(window.location.search);
-const PROJECT_ID=q.get("project_id")||"";
-document.getElementById("customerName").value=q.get("customer_name")||"";
-document.getElementById("email").value=q.get("email")||"";
-document.getElementById("calendarName").value=q.get("calendar_title")||"";
-document.getElementById("orderNumber").value=q.get("order_number")||"";
-document.getElementById("calendarYear").value=q.get("calendar_year")||"";
+const PROJECT_ID="";
 function monthOptions(){return `<option value="">Month</option>`+["January","February","March","April","May","June","July","August","September","October","November","December"].map((m,i)=>`<option value="${i+1}">${m}</option>`).join("")}
 function addBirthday(){const d=document.createElement("div");d.className="row birthday";d.innerHTML=`<input class="name" placeholder="Full name"><select class="month">${monthOptions()}</select><input class="day" type="number" min="1" max="31" placeholder="Day"><button class="remove" type="button" onclick="this.parentElement.remove()">Remove</button>`;document.getElementById("birthdays").appendChild(d)}
 function addAnniversary(){const d=document.createElement("div");d.className="row anniversary";d.innerHTML=`<input class="name" placeholder="Name 1 / Name 2"><select class="month">${monthOptions()}</select><input class="day" type="number" min="1" max="31" placeholder="Day"><button class="remove" type="button" onclick="this.parentElement.remove()">Remove</button>`;document.getElementById("anniversaries").appendChild(d)}
@@ -67,7 +61,7 @@ function typeChanged(){const t=document.getElementById("calendarType").value;doc
 function collectRows(selector,type){return [...document.querySelectorAll(selector)].map(r=>({type:type,name:r.querySelector(".name").value.trim(),month:Number(r.querySelector(".month").value),day:Number(r.querySelector(".day").value)})).filter(x=>x.name&&x.month&&x.day)}
 function data(){const t=document.getElementById("calendarType").value;let entries=[];if(t!=="Anniversary Calendar")entries=entries.concat(collectRows(".birthday","Birthday"));if(t!=="Birthday Calendar")entries=entries.concat(collectRows(".anniversary","Anniversary"));return{format:"PersonalizedKeepsakeCustomerResponse",schema_version:1,project_id:PROJECT_ID,calendar_title:document.getElementById("calendarName").value.trim(),customer_name:document.getElementById("customerName").value.trim(),email:document.getElementById("email").value.trim(),order_number:document.getElementById("orderNumber").value.trim(),calendar_year:Number(document.getElementById("calendarYear").value),calendar_type:t,entries:entries,notes:document.getElementById("notes").value.trim()}}
 function showReview(){const d=data();const lines=[`Name: ${d.customer_name}`,`Email: ${d.email}`,`Calendar Name: ${d.calendar_title}`,`Order: ${d.order_number}`,`Year: ${d.calendar_year}`,`Calendar Type: ${d.calendar_type}`,"","Names and Dates:"];d.entries.forEach(e=>lines.push(`${e.type}: ${e.name} — ${e.month}/${e.day}`));if(d.notes)lines.push("","Notes:",d.notes);document.getElementById("review").textContent=lines.join("\n")}
-function downloadResponse(){const d=data();if(!d.customer_name||!d.email||!d.calendar_title||!d.calendar_year){alert("Please enter your name, email, Calendar Name, and calendar year before downloading.");return}if(d.entries.length===0){alert("Please add at least one birthday or anniversary.");return}const blob=new Blob([JSON.stringify(d,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);const safe=(d.customer_name||"customer").replace(/[^a-z0-9]+/gi,"-");a.download=`${safe}-Calendar-Response.pksresponse`;a.click();URL.revokeObjectURL(a.href)}
+function downloadResponse(){const d=data();if(!d.customer_name||!d.email||!d.calendar_title||!d.order_number||!d.calendar_year){alert("Please enter your name, email, Calendar Name, order number, and calendar year before downloading.");return}if(d.entries.length===0){alert("Please add at least one birthday or anniversary.");return}const blob=new Blob([JSON.stringify(d,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);const safe=(d.customer_name||"customer").replace(/[^a-z0-9]+/gi,"-");a.download=`${safe}-Calendar-Response.pksresponse`;a.click();URL.revokeObjectURL(a.href)}
 addBirthday();typeChanged();
 </script>
 </body>
