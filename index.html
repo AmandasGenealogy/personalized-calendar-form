@@ -278,14 +278,16 @@ JPG, PNG, WEBP, HEIC and HEIF photos are accepted. Each photo must be 15 MB or s
 >
 
 <p id="photoCount" class="small">No photos selected.</p>
-
+  
+<div id="uploadReminder" class="photo-status" style="display:none"></div>
+  
 <button
   id="uploadPhotosButton"
   class="primary"
   type="button"
   onclick="uploadPhotos()"
 >
-Upload Photos
+⬆ UPLOAD PHOTOS NOW
 </button>
 
 <div id="photoStatus" class="photo-status"></div>
@@ -668,7 +670,90 @@ function photosSelected(){
 }
 
 
-function setPhotoStatus(message,type){
+function photosSelected(){
+
+  const files =
+    [...document.getElementById("photoFiles").files];
+
+  const count =
+    document.getElementById("photoCount");
+
+  const reminder =
+    document.getElementById("uploadReminder");
+
+  const status =
+    document.getElementById("photoStatus");
+
+  const button =
+    document.getElementById("uploadPhotosButton");
+
+  photoUploadFinished = false;
+  successfullyUploadedPhotos = 0;
+
+  if(files.length === 0){
+
+    count.textContent =
+      "No photos selected.";
+
+    reminder.style.display =
+      "none";
+
+    status.style.display =
+      "none";
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "⬆ UPLOAD PHOTOS NOW";
+
+    return;
+
+  }
+
+  if(files.length > MAX_PHOTOS){
+
+    count.textContent =
+      `You selected ${files.length} photos. Please choose no more than ${MAX_PHOTOS}.`;
+
+    reminder.className =
+      "photo-status error";
+
+    reminder.style.display =
+      "block";
+
+    reminder.innerHTML =
+      `<strong>TOO MANY PHOTOS SELECTED</strong><br>Please choose ${MAX_PHOTOS} photos or fewer.`;
+
+    status.style.display =
+      "none";
+
+    return;
+
+  }
+
+  count.textContent =
+    `${files.length} photo${files.length === 1 ? "" : "s"} selected.`;
+
+  reminder.className =
+    "photo-status info";
+
+  reminder.style.display =
+    "block";
+
+  reminder.innerHTML =
+    `<strong>STEP 2 — IMPORTANT:</strong><br>Your photos are selected, but they have <strong>NOT been uploaded yet.</strong><br><br>Click <strong>⬆ UPLOAD PHOTOS NOW</strong> before finishing your calendar form.`;
+
+  status.style.display =
+    "none";
+
+  button.disabled =
+    false;
+
+  button.textContent =
+    "⬆ UPLOAD PHOTOS NOW";
+
+}
 
   const box =
     document.getElementById("photoStatus");
@@ -841,7 +926,19 @@ async function uploadPhotos(){
     );
 
     button.textContent =
-      "Photos Uploaded";
+  "✓ PHOTOS UPLOADED";
+
+const reminder =
+  document.getElementById("uploadReminder");
+
+reminder.className =
+  "photo-status success";
+
+reminder.style.display =
+  "block";
+
+reminder.innerHTML =
+  `<strong>✓ PHOTOS SUCCESSFULLY UPLOADED</strong><br>Your ${successfullyUploadedPhotos} photo${successfullyUploadedPhotos === 1 ? "" : "s"} ${successfullyUploadedPhotos === 1 ? "has" : "have"} been received.<br><br>You may now continue with your calendar form.`;
 
   }catch(error){
 
@@ -874,6 +971,7 @@ function safeFilename(text){
 function downloadResponse(){
 
   const d = data();
+  function downloadResponse()
 
   if(
     !d.customer_name ||
