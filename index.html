@@ -971,8 +971,21 @@ function safeFilename(text){
 function downloadResponse(){
 
   const d = data();
-  function downloadResponse()
+  const selectedPhotos =
+  document.getElementById("photoFiles").files.length;
 
+if(selectedPhotos > 0 && !photoUploadFinished){
+
+  alert(
+    "IMPORTANT: Your photos are selected, but they have NOT been uploaded yet. Please click UPLOAD PHOTOS NOW before downloading your calendar response."
+  );
+
+  document
+    .getElementById("uploadReminder")
+    .scrollIntoView({behavior:"smooth", block:"center"});
+
+  return;
+}
   if(
     !d.customer_name ||
     !d.email ||
