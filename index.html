@@ -352,7 +352,7 @@ After downloading the response file, send it back to Amanda Sanford at
 
 </div>
 
-
+  
 <script>
 
 const PROJECT_ID = "";
@@ -453,11 +453,6 @@ function validMonthDay(month,day){
 
   if(m < 1 || m > 12 || d < 1 || d > 31)
     return false;
-
-  /*
-    Use leap year 2024 so February 29 birthdays
-    are accepted regardless of the calendar year.
-  */
 
   const test = new Date(2024,m - 1,d);
 
@@ -638,46 +633,6 @@ function photosSelected(){
   const count =
     document.getElementById("photoCount");
 
-  photoUploadFinished = false;
-  successfullyUploadedPhotos = 0;
-
-  if(files.length === 0){
-
-    count.textContent =
-      "No photos selected.";
-
-    return;
-
-  }
-
-  if(files.length > MAX_PHOTOS){
-
-    count.textContent =
-      `You selected ${files.length} photos. Please choose no more than ${MAX_PHOTOS}.`;
-
-    return;
-
-  }
-
-  count.textContent =
-    `${files.length} photo${files.length === 1 ? "" : "s"} selected.`;
-
-  setPhotoStatus(
-    "Your photos are ready to upload.",
-    "info"
-  );
-
-}
-
-
-function photosSelected(){
-
-  const files =
-    [...document.getElementById("photoFiles").files];
-
-  const count =
-    document.getElementById("photoCount");
-
   const reminder =
     document.getElementById("uploadReminder");
 
@@ -754,6 +709,9 @@ function photosSelected(){
     "⬆ UPLOAD PHOTOS NOW";
 
 }
+
+
+function setPhotoStatus(message,type){
 
   const box =
     document.getElementById("photoStatus");
@@ -837,7 +795,6 @@ async function uploadPhotos(){
 
   }
 
-
   const button =
     document.getElementById("uploadPhotosButton");
 
@@ -879,7 +836,6 @@ async function uploadPhotos(){
         files[i].name
       );
 
-
       const response =
         await fetch(
           PHOTO_UPLOAD_URL,
@@ -888,7 +844,6 @@ async function uploadPhotos(){
             body:form
           }
         );
-
 
       let result = {};
 
@@ -903,7 +858,6 @@ async function uploadPhotos(){
 
       }
 
-
       if(!response.ok || !result.ok){
 
         throw new Error(
@@ -917,7 +871,6 @@ async function uploadPhotos(){
 
     }
 
-
     photoUploadFinished = true;
 
     setPhotoStatus(
@@ -926,19 +879,19 @@ async function uploadPhotos(){
     );
 
     button.textContent =
-  "✓ PHOTOS UPLOADED";
+      "✓ PHOTOS SUCCESSFULLY UPLOADED";
 
-const reminder =
-  document.getElementById("uploadReminder");
+    const reminder =
+      document.getElementById("uploadReminder");
 
-reminder.className =
-  "photo-status success";
+    reminder.className =
+      "photo-status success";
 
-reminder.style.display =
-  "block";
+    reminder.style.display =
+      "block";
 
-reminder.innerHTML =
-  `<strong>✓ PHOTOS SUCCESSFULLY UPLOADED</strong><br>Your ${successfullyUploadedPhotos} photo${successfullyUploadedPhotos === 1 ? "" : "s"} ${successfullyUploadedPhotos === 1 ? "has" : "have"} been received.<br><br>You may now continue with your calendar form.`;
+    reminder.innerHTML =
+      `<strong>✓ PHOTOS SUCCESSFULLY UPLOADED</strong><br>Your ${successfullyUploadedPhotos} photo${successfullyUploadedPhotos === 1 ? "" : "s"} ${successfullyUploadedPhotos === 1 ? "has" : "have"} been received.<br><br>You may now continue with your calendar form.`;
 
   }catch(error){
 
@@ -951,7 +904,7 @@ reminder.innerHTML =
 
     button.disabled = false;
     button.textContent =
-      "Upload Photos";
+      "⬆ UPLOAD PHOTOS NOW";
 
   }
 
@@ -971,21 +924,24 @@ function safeFilename(text){
 function downloadResponse(){
 
   const d = data();
+
   const selectedPhotos =
-  document.getElementById("photoFiles").files.length;
+    document.getElementById("photoFiles").files.length;
 
-if(selectedPhotos > 0 && !photoUploadFinished){
+  if(selectedPhotos > 0 && !photoUploadFinished){
 
-  alert(
-    "IMPORTANT: Your photos are selected, but they have NOT been uploaded yet. Please click UPLOAD PHOTOS NOW before downloading your calendar response."
-  );
+    alert(
+      "IMPORTANT: Your photos are selected, but they have NOT been uploaded yet. Please click UPLOAD PHOTOS NOW before downloading your calendar response."
+    );
 
-  document
-    .getElementById("uploadReminder")
-    .scrollIntoView({behavior:"smooth", block:"center"});
+    document
+      .getElementById("uploadReminder")
+      .scrollIntoView({behavior:"smooth", block:"center"});
 
-  return;
-}
+    return;
+
+  }
+
   if(
     !d.customer_name ||
     !d.email ||
@@ -1013,7 +969,6 @@ if(selectedPhotos > 0 && !photoUploadFinished){
 
   }
 
-
   const blob =
     new Blob(
       [
@@ -1023,7 +978,6 @@ if(selectedPhotos > 0 && !photoUploadFinished){
         type:"application/json;charset=utf-8"
       }
     );
-
 
   const url =
     URL.createObjectURL(blob);
@@ -1060,7 +1014,6 @@ function loadFromLink(){
       window.location.search
     );
 
-
   const getFirst = (...names) => {
 
     for(const name of names){
@@ -1076,7 +1029,6 @@ function loadFromLink(){
     return "";
 
   };
-
 
   const customer =
     getFirst(
@@ -1113,7 +1065,6 @@ function loadFromLink(){
       "calendar_type",
       "type"
     );
-
 
   if(customer)
     document.getElementById("customerName").value =
@@ -1161,6 +1112,7 @@ loadFromLink();
 typeChanged();
 
 </script>
+
 
 </body>
 </html>
