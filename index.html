@@ -4,65 +4,1052 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personalized Calendar Information</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#f7f2ed;color:#3d2c26;margin:0}
-.wrap{max-width:900px;margin:32px auto;background:#fff;padding:28px;border-radius:18px;box-shadow:0 6px 24px #0001}
-h1,h2{margin-top:0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{font-weight:700;display:block;margin-bottom:5px}
-input,select,textarea{width:100%;box-sizing:border-box;padding:11px;border:1px solid #cdb8aa;border-radius:8px;font-size:16px}
-.section{margin-top:24px;padding-top:18px;border-top:1px solid #eadfd7}
-.row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:8px}
-button{padding:11px 16px;border:0;border-radius:9px;font-size:15px;cursor:pointer}
-.primary{background:#789782;color:white;font-weight:700}.secondary{background:#c6977d;color:white}.remove{background:#eee5df}
-.warning{display:none;margin-top:10px;padding:12px;background:#fff4d6;border:1px solid #e1c875;border-radius:8px}
-#review{white-space:pre-wrap;background:#faf7f4;border:1px solid #dfd0c5;border-radius:8px;padding:15px;min-height:80px}
-.small{font-size:14px;color:#765d50}@media(max-width:700px){.grid,.row{grid-template-columns:1fr}}
+body{
+  font-family:Arial,sans-serif;
+  background:#f7f2ed;
+  color:#3d2c26;
+  margin:0;
+}
+
+.wrap{
+  max-width:900px;
+  margin:32px auto;
+  background:#fff;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 6px 24px #0001;
+}
+
+h1,h2{margin-top:0}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+label{
+  font-weight:700;
+  display:block;
+  margin-bottom:5px;
+}
+
+input,select,textarea{
+  width:100%;
+  box-sizing:border-box;
+  padding:11px;
+  border:1px solid #cdb8aa;
+  border-radius:8px;
+  font-size:16px;
+}
+
+.section{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid #eadfd7;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr auto;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+button{
+  padding:11px 16px;
+  border:0;
+  border-radius:9px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.primary{
+  background:#789782;
+  color:white;
+  font-weight:700;
+}
+
+.secondary{
+  background:#c6977d;
+  color:white;
+}
+
+.remove{
+  background:#eee5df;
+  color:#3d2c26;
+}
+
+.warning{
+  display:none;
+  margin-top:10px;
+  padding:12px;
+  background:#fff4d6;
+  border:1px solid #e1c875;
+  border-radius:8px;
+}
+
+#review{
+  white-space:pre-wrap;
+  background:#faf7f4;
+  border:1px solid #dfd0c5;
+  border-radius:8px;
+  padding:15px;
+  min-height:80px;
+}
+
+.small{
+  font-size:14px;
+  color:#765d50;
+}
+
+.photo-box{
+  background:#faf7f4;
+  border:1px solid #dfd0c5;
+  border-radius:10px;
+  padding:16px;
+}
+
+.photo-status{
+  margin-top:12px;
+  padding:12px;
+  border-radius:8px;
+  display:none;
+}
+
+.photo-status.info{
+  display:block;
+  background:#eef5f0;
+  border:1px solid #b9d0c0;
+}
+
+.photo-status.success{
+  display:block;
+  background:#e8f6eb;
+  border:1px solid #8fc49a;
+  color:#235c31;
+}
+
+.photo-status.error{
+  display:block;
+  background:#fff0f0;
+  border:1px solid #d99b9b;
+  color:#8a2525;
+}
+
+.progress{
+  margin-top:10px;
+  font-weight:700;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+@media(max-width:700px){
+  .grid,.row{
+    grid-template-columns:1fr;
+  }
+
+  .wrap{
+    margin:0;
+    border-radius:0;
+  }
+}
 </style>
 </head>
+
 <body>
 <div class="wrap">
+
 <h1>Personalized Calendar Information</h1>
-<p>Please enter the names and dates exactly as you would like them used in your calendar.</p>
+
+<p>
+Please enter the names and dates exactly as you would like them used in your calendar.
+</p>
+
 <div class="grid">
-<div><label>Your name</label><input id="customerName"></div>
-<div><label>Email</label><input id="email" type="email"></div>
-<div><label>Calendar Name</label><input id="calendarName" placeholder="Example: The Sanford Family Calendar"></div>
-<div><label>Order number</label><input id="orderNumber" placeholder="Enter the order number from Amanda&#39;s email"></div>
-<div><label>Calendar year</label><input id="calendarYear" type="number"></div>
+
+<div>
+<label>Your name</label>
+<input id="customerName">
 </div>
+
+<div>
+<label>Email</label>
+<input id="email" type="email">
+</div>
+
+<div>
+<label>Calendar Name</label>
+<input id="calendarName" placeholder="Example: The Sanford Family Calendar">
+</div>
+
+<div>
+<label>Order number</label>
+<input id="orderNumber" placeholder="Enter the order number from Amanda's email">
+</div>
+
+<div>
+<label>Calendar year</label>
+<input id="calendarYear" type="number">
+</div>
+
+</div>
+
+
 <div class="section">
+
 <label>Calendar type</label>
+
 <select id="calendarType" onchange="typeChanged()">
-<option>Birthday Calendar</option>
-<option>Anniversary Calendar</option>
-<option>Birthdays & Anniversaries</option>
+<option value="Birthday Calendar">Birthday Calendar</option>
+<option value="Anniversary Calendar">Anniversary Calendar</option>
+<option value="Birthdays & Anniversaries">Birthdays & Anniversaries</option>
 </select>
-<div id="bothWarning" class="warning">If you include both birthdays and anniversaries, dates with several names may need smaller text in the finished calendar.</div>
+
+<div id="bothWarning" class="warning">
+If you include both birthdays and anniversaries, dates with several names may need smaller text on the finished calendar.
 </div>
+
+</div>
+
+
 <div class="section" id="birthdaysSection">
-<h2>Birthdays</h2><p class="small">Enter the full name exactly as you want it shown.</p>
-<div id="birthdays"></div><button class="secondary" type="button" onclick="addBirthday()">Add Birthday</button>
+
+<h2>Birthdays</h2>
+
+<p class="small">
+Enter the full name exactly as you want it shown.
+</p>
+
+<div id="birthdays"></div>
+
+<button class="secondary" type="button" onclick="addBirthday()">
+Add Birthday
+</button>
+
 </div>
+
+
 <div class="section" id="anniversariesSection" style="display:none">
-<h2>Anniversaries</h2><p class="small">Enter each person's name. The finished calendar may display the couple in a compact format such as Amanda/Duane.</p>
-<div id="anniversaries"></div><button class="secondary" type="button" onclick="addAnniversary()">Add Anniversary</button>
+
+<h2>Anniversaries</h2>
+
+<p class="small">
+Enter the names exactly as you would like them shown on the calendar.
+</p>
+
+<div id="anniversaries"></div>
+
+<button class="secondary" type="button" onclick="addAnniversary()">
+Add Anniversary
+</button>
+
 </div>
-<div class="section"><label>Notes for Amanda</label><textarea id="notes" rows="4" placeholder="Optional special instructions"></textarea></div>
-<div class="section"><h2>Review</h2><button class="secondary" type="button" onclick="showReview()">Review Information</button><div id="review">Your review will appear here.</div></div>
-<div class="section"><button class="primary" type="button" onclick="downloadResponse()">Download Response</button>
-<p class="small">After downloading the response file, send it back to Amanda Sanford at amandasanfordproducts@gmail.com.</p></div>
+
+
+<div class="section">
+
+<h2>Family Photos — Optional</h2>
+
+<div class="photo-box">
+
+<p>
+You may upload up to <strong>24 family photos</strong> for Amanda to consider when creating your personalized calendar.
+</p>
+
+<p class="small">
+JPG, PNG, WEBP, HEIC and HEIF photos are accepted. Each photo must be 15 MB or smaller. Not every uploaded photo is guaranteed to be used.
+</p>
+
+<label>Select your photos</label>
+
+<input
+  id="photoFiles"
+  type="file"
+  accept=".jpg,.jpeg,.png,.webp,.heic,.heif,image/jpeg,image/png,image/webp,image/heic,image/heif"
+  multiple
+  onchange="photosSelected()"
+>
+
+<p id="photoCount" class="small">No photos selected.</p>
+
+<button
+  id="uploadPhotosButton"
+  class="primary"
+  type="button"
+  onclick="uploadPhotos()"
+>
+Upload Photos
+</button>
+
+<div id="photoStatus" class="photo-status"></div>
+
 </div>
+
+</div>
+
+
+<div class="section">
+
+<label>Notes for Amanda</label>
+
+<textarea
+  id="notes"
+  rows="4"
+  placeholder="Optional special instructions"
+></textarea>
+
+</div>
+
+
+<div class="section">
+
+<h2>Review</h2>
+
+<button
+  class="secondary"
+  type="button"
+  onclick="showReview()"
+>
+Review Information
+</button>
+
+<div id="review" style="margin-top:12px">
+Your review will appear here.
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="actions">
+
+<button
+  class="primary"
+  type="button"
+  onclick="downloadResponse()"
+>
+Download Response
+</button>
+
+</div>
+
+<p class="small">
+After downloading the response file, send it back to Amanda Sanford at
+<strong>amandasanfordproducts@gmail.com</strong>.
+</p>
+
+</div>
+
+</div>
+
+
 <script>
-const PROJECT_ID="";
-function monthOptions(){return `<option value="">Month</option>`+["January","February","March","April","May","June","July","August","September","October","November","December"].map((m,i)=>`<option value="${i+1}">${m}</option>`).join("")}
-function addBirthday(){const d=document.createElement("div");d.className="row birthday";d.innerHTML=`<input class="name" placeholder="Full name"><select class="month">${monthOptions()}</select><input class="day" type="number" min="1" max="31" placeholder="Day"><button class="remove" type="button" onclick="this.parentElement.remove()">Remove</button>`;document.getElementById("birthdays").appendChild(d)}
-function addAnniversary(){const d=document.createElement("div");d.className="row anniversary";d.innerHTML=`<input class="name" placeholder="Name 1 / Name 2"><select class="month">${monthOptions()}</select><input class="day" type="number" min="1" max="31" placeholder="Day"><button class="remove" type="button" onclick="this.parentElement.remove()">Remove</button>`;document.getElementById("anniversaries").appendChild(d)}
-function typeChanged(){const t=document.getElementById("calendarType").value;document.getElementById("birthdaysSection").style.display=t==="Anniversary Calendar"?"none":"block";document.getElementById("anniversariesSection").style.display=t==="Birthday Calendar"?"none":"block";document.getElementById("bothWarning").style.display=t==="Birthdays & Anniversaries"?"block":"none"}
-function collectRows(selector,type){return [...document.querySelectorAll(selector)].map(r=>({type:type,name:r.querySelector(".name").value.trim(),month:Number(r.querySelector(".month").value),day:Number(r.querySelector(".day").value)})).filter(x=>x.name&&x.month&&x.day)}
-function data(){const t=document.getElementById("calendarType").value;let entries=[];if(t!=="Anniversary Calendar")entries=entries.concat(collectRows(".birthday","Birthday"));if(t!=="Birthday Calendar")entries=entries.concat(collectRows(".anniversary","Anniversary"));return{format:"PersonalizedKeepsakeCustomerResponse",schema_version:1,project_id:PROJECT_ID,calendar_title:document.getElementById("calendarName").value.trim(),customer_name:document.getElementById("customerName").value.trim(),email:document.getElementById("email").value.trim(),order_number:document.getElementById("orderNumber").value.trim(),calendar_year:Number(document.getElementById("calendarYear").value),calendar_type:t,entries:entries,notes:document.getElementById("notes").value.trim()}}
-function showReview(){const d=data();const lines=[`Name: ${d.customer_name}`,`Email: ${d.email}`,`Calendar Name: ${d.calendar_title}`,`Order: ${d.order_number}`,`Year: ${d.calendar_year}`,`Calendar Type: ${d.calendar_type}`,"","Names and Dates:"];d.entries.forEach(e=>lines.push(`${e.type}: ${e.name} — ${e.month}/${e.day}`));if(d.notes)lines.push("","Notes:",d.notes);document.getElementById("review").textContent=lines.join("\n")}
-function downloadResponse(){const d=data();if(!d.customer_name||!d.email||!d.calendar_title||!d.order_number||!d.calendar_year){alert("Please enter your name, email, Calendar Name, order number, and calendar year before downloading.");return}if(d.entries.length===0){alert("Please add at least one birthday or anniversary.");return}const blob=new Blob([JSON.stringify(d,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);const safe=(d.customer_name||"customer").replace(/[^a-z0-9]+/gi,"-");a.download=`${safe}-Calendar-Response.pksresponse`;a.click();URL.revokeObjectURL(a.href)}
-addBirthday();typeChanged();
+
+const PROJECT_ID = "";
+
+const PHOTO_UPLOAD_URL =
+  "https://calendar-photo-upload.amandasanfordproducts.workers.dev/upload";
+
+const MAX_PHOTOS = 24;
+const MAX_PHOTO_SIZE = 15 * 1024 * 1024;
+
+let successfullyUploadedPhotos = 0;
+let photoUploadFinished = false;
+
+
+function monthOptions(){
+
+  const months = [
+    "January","February","March","April",
+    "May","June","July","August",
+    "September","October","November","December"
+  ];
+
+  return '<option value="">Month</option>' +
+    months.map((month,index) =>
+      `<option value="${index + 1}">${month}</option>`
+    ).join("");
+
+}
+
+
+function addBirthday(){
+
+  const d = document.createElement("div");
+
+  d.className = "row birthday";
+
+  d.innerHTML = `
+    <input class="name" placeholder="Full name">
+    <select class="month">${monthOptions()}</select>
+    <input class="day" type="number" min="1" max="31" placeholder="Day">
+    <button class="remove" type="button" onclick="this.parentElement.remove()">Remove</button>
+  `;
+
+  document.getElementById("birthdays").appendChild(d);
+
+}
+
+
+function addAnniversary(){
+
+  const d = document.createElement("div");
+
+  d.className = "row anniversary";
+
+  d.innerHTML = `
+    <input class="name" placeholder="Names">
+    <select class="month">${monthOptions()}</select>
+    <input class="day" type="number" min="1" max="31" placeholder="Day">
+    <button class="remove" type="button" onclick="this.parentElement.remove()">Remove</button>
+  `;
+
+  document.getElementById("anniversaries").appendChild(d);
+
+}
+
+
+function typeChanged(){
+
+  const type = document.getElementById("calendarType").value;
+
+  const birthdays =
+    document.getElementById("birthdaysSection");
+
+  const anniversaries =
+    document.getElementById("anniversariesSection");
+
+  const warning =
+    document.getElementById("bothWarning");
+
+  birthdays.style.display =
+    type === "Anniversary Calendar" ? "none" : "block";
+
+  anniversaries.style.display =
+    type === "Birthday Calendar" ? "none" : "block";
+
+  warning.style.display =
+    type === "Birthdays & Anniversaries" ? "block" : "none";
+
+}
+
+
+function validMonthDay(month,day){
+
+  if(!month || !day) return false;
+
+  const m = Number(month);
+  const d = Number(day);
+
+  if(m < 1 || m > 12 || d < 1 || d > 31)
+    return false;
+
+  /*
+    Use leap year 2024 so February 29 birthdays
+    are accepted regardless of the calendar year.
+  */
+
+  const test = new Date(2024,m - 1,d);
+
+  return (
+    test.getFullYear() === 2024 &&
+    test.getMonth() === m - 1 &&
+    test.getDate() === d
+  );
+
+}
+
+
+function collectRows(selector,type){
+
+  return [...document.querySelectorAll(selector)]
+    .map(row => {
+
+      const name =
+        row.querySelector(".name").value.trim();
+
+      const month =
+        Number(row.querySelector(".month").value);
+
+      const day =
+        Number(row.querySelector(".day").value);
+
+      return {
+        type:type,
+        name:name,
+        month:month,
+        day:day
+      };
+
+    })
+    .filter(item =>
+      item.name &&
+      validMonthDay(item.month,item.day)
+    );
+
+}
+
+
+function data(){
+
+  const type =
+    document.getElementById("calendarType").value;
+
+  let entries = [];
+
+  if(type !== "Anniversary Calendar"){
+
+    entries = entries.concat(
+      collectRows(".birthday","Birthday")
+    );
+
+  }
+
+  if(type !== "Birthday Calendar"){
+
+    entries = entries.concat(
+      collectRows(".anniversary","Anniversary")
+    );
+
+  }
+
+  entries.sort((a,b) =>
+    a.month - b.month ||
+    a.day - b.day ||
+    a.name.localeCompare(b.name)
+  );
+
+  return {
+
+    format:
+      "PersonalizedKeepsakeCustomerResponse",
+
+    project_id:
+      PROJECT_ID,
+
+    customer_name:
+      document.getElementById("customerName").value.trim(),
+
+    email:
+      document.getElementById("email").value.trim(),
+
+    calendar_title:
+      document.getElementById("calendarName").value.trim(),
+
+    order_number:
+      document.getElementById("orderNumber").value.trim(),
+
+    calendar_year:
+      Number(document.getElementById("calendarYear").value),
+
+    calendar_type:
+      type,
+
+    entries:
+      entries,
+
+    notes:
+      document.getElementById("notes").value.trim(),
+
+    photo_count:
+      successfullyUploadedPhotos,
+
+    photos_uploaded:
+      photoUploadFinished,
+
+    submitted_at:
+      new Date().toISOString()
+
+  };
+
+}
+
+
+function showReview(){
+
+  const d = data();
+
+  const lines = [
+
+    `Name: ${d.customer_name}`,
+    `Email: ${d.email}`,
+    `Calendar Name: ${d.calendar_title}`,
+    `Order: ${d.order_number}`,
+    `Year: ${d.calendar_year || ""}`,
+    `Calendar Type: ${d.calendar_type}`,
+    "",
+    "Names and Dates:"
+
+  ];
+
+  if(d.entries.length === 0){
+
+    lines.push("No names and dates entered.");
+
+  }else{
+
+    d.entries.forEach(item => {
+
+      const monthName =
+        new Date(2024,item.month - 1,1)
+          .toLocaleString("en-US",{month:"long"});
+
+      lines.push(
+        `${item.type}: ${item.name} — ${monthName} ${item.day}`
+      );
+
+    });
+
+  }
+
+  lines.push("");
+  lines.push(
+    `Photos uploaded: ${successfullyUploadedPhotos}`
+  );
+
+  if(d.notes){
+
+    lines.push("");
+    lines.push(`Notes: ${d.notes}`);
+
+  }
+
+  document.getElementById("review").textContent =
+    lines.join("\n");
+
+}
+
+
+function photosSelected(){
+
+  const files =
+    [...document.getElementById("photoFiles").files];
+
+  const count =
+    document.getElementById("photoCount");
+
+  photoUploadFinished = false;
+  successfullyUploadedPhotos = 0;
+
+  if(files.length === 0){
+
+    count.textContent =
+      "No photos selected.";
+
+    return;
+
+  }
+
+  if(files.length > MAX_PHOTOS){
+
+    count.textContent =
+      `You selected ${files.length} photos. Please choose no more than ${MAX_PHOTOS}.`;
+
+    return;
+
+  }
+
+  count.textContent =
+    `${files.length} photo${files.length === 1 ? "" : "s"} selected.`;
+
+  setPhotoStatus(
+    "Your photos are ready to upload.",
+    "info"
+  );
+
+}
+
+
+function setPhotoStatus(message,type){
+
+  const box =
+    document.getElementById("photoStatus");
+
+  box.className =
+    `photo-status ${type}`;
+
+  box.textContent =
+    message;
+
+}
+
+
+async function uploadPhotos(){
+
+  const files =
+    [...document.getElementById("photoFiles").files];
+
+  const orderNumber =
+    document.getElementById("orderNumber").value.trim();
+
+  const customerName =
+    document.getElementById("customerName").value.trim();
+
+  if(!orderNumber){
+
+    setPhotoStatus(
+      "Please enter your order number before uploading photos.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(!customerName){
+
+    setPhotoStatus(
+      "Please enter your name before uploading photos.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(files.length === 0){
+
+    setPhotoStatus(
+      "Please select at least one photo first.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  if(files.length > MAX_PHOTOS){
+
+    setPhotoStatus(
+      `Please select no more than ${MAX_PHOTOS} photos.`,
+      "error"
+    );
+
+    return;
+
+  }
+
+  for(const file of files){
+
+    if(file.size > MAX_PHOTO_SIZE){
+
+      setPhotoStatus(
+        `${file.name} is larger than 15 MB. Please choose a smaller photo.`,
+        "error"
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  const button =
+    document.getElementById("uploadPhotosButton");
+
+  button.disabled = true;
+  button.textContent = "Uploading...";
+
+  successfullyUploadedPhotos = 0;
+
+  try{
+
+    for(let i = 0; i < files.length; i++){
+
+      setPhotoStatus(
+        `Uploading photo ${i + 1} of ${files.length}...`,
+        "info"
+      );
+
+      const form =
+        new FormData();
+
+      form.append(
+        "orderNumber",
+        orderNumber
+      );
+
+      form.append(
+        "customerName",
+        customerName
+      );
+
+      form.append(
+        "photoNumber",
+        String(i + 1)
+      );
+
+      form.append(
+        "photo",
+        files[i],
+        files[i].name
+      );
+
+
+      const response =
+        await fetch(
+          PHOTO_UPLOAD_URL,
+          {
+            method:"POST",
+            body:form
+          }
+        );
+
+
+      let result = {};
+
+      try{
+
+        result =
+          await response.json();
+
+      }catch(e){
+
+        result = {};
+
+      }
+
+
+      if(!response.ok || !result.ok){
+
+        throw new Error(
+          result.error ||
+          `Photo ${i + 1} could not be uploaded.`
+        );
+
+      }
+
+      successfullyUploadedPhotos++;
+
+    }
+
+
+    photoUploadFinished = true;
+
+    setPhotoStatus(
+      `Success! ${successfullyUploadedPhotos} photo${successfullyUploadedPhotos === 1 ? "" : "s"} uploaded securely.`,
+      "success"
+    );
+
+    button.textContent =
+      "Photos Uploaded";
+
+  }catch(error){
+
+    photoUploadFinished = false;
+
+    setPhotoStatus(
+      `Upload stopped: ${error.message}`,
+      "error"
+    );
+
+    button.disabled = false;
+    button.textContent =
+      "Upload Photos";
+
+  }
+
+}
+
+
+function safeFilename(text){
+
+  return String(text || "Calendar")
+    .replace(/[<>:"/\\|?*]+/g,"")
+    .replace(/\s+/g," ")
+    .trim() || "Calendar";
+
+}
+
+
+function downloadResponse(){
+
+  const d = data();
+
+  if(
+    !d.customer_name ||
+    !d.email ||
+    !d.calendar_title ||
+    !d.order_number ||
+    !d.calendar_year
+  ){
+
+    alert(
+      "Please complete your name, email, calendar name, order number, and calendar year before downloading."
+    );
+
+    return;
+
+  }
+
+  if(d.entries.length === 0){
+
+    const proceed =
+      confirm(
+        "No birthdays or anniversaries have been entered. Do you still want to download the response?"
+      );
+
+    if(!proceed) return;
+
+  }
+
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(d,null,2)
+      ],
+      {
+        type:"application/json;charset=utf-8"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  const base =
+    safeFilename(
+      d.calendar_title ||
+      d.customer_name
+    );
+
+  a.href = url;
+
+  a.download =
+    `${base}-Calendar-Response.pksresponse`;
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+}
+
+
+function loadFromLink(){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const getFirst = (...names) => {
+
+    for(const name of names){
+
+      const value =
+        params.get(name);
+
+      if(value)
+        return value;
+
+    }
+
+    return "";
+
+  };
+
+
+  const customer =
+    getFirst(
+      "customer_name",
+      "customer",
+      "name"
+    );
+
+  const email =
+    getFirst(
+      "email"
+    );
+
+  const calendarName =
+    getFirst(
+      "calendar_title",
+      "calendar_name"
+    );
+
+  const order =
+    getFirst(
+      "order_number",
+      "order"
+    );
+
+  const year =
+    getFirst(
+      "calendar_year",
+      "year"
+    );
+
+  const type =
+    getFirst(
+      "calendar_type",
+      "type"
+    );
+
+
+  if(customer)
+    document.getElementById("customerName").value =
+      customer;
+
+  if(email)
+    document.getElementById("email").value =
+      email;
+
+  if(calendarName)
+    document.getElementById("calendarName").value =
+      calendarName;
+
+  if(order)
+    document.getElementById("orderNumber").value =
+      order;
+
+  if(year)
+    document.getElementById("calendarYear").value =
+      year;
+
+  if(type){
+
+    const select =
+      document.getElementById("calendarType");
+
+    const option =
+      [...select.options]
+      .find(x =>
+        x.value.toLowerCase() ===
+        type.toLowerCase()
+      );
+
+    if(option)
+      select.value =
+        option.value;
+
+  }
+
+}
+
+
+addBirthday();
+loadFromLink();
+typeChanged();
+
 </script>
+
 </body>
 </html>
